@@ -20,21 +20,41 @@
     </p>
 
     <section class="bg-slate-900/70 backdrop-blur rounded-2xl p-8 border border-indigo-500/20 shadow-2xl card" style="animation-delay:.2s">
-      <div class="relative rounded-xl overflow-hidden border border-indigo-500/20 bg-black aspect-video">
-        <video id="demo" controls autoplay loop muted playsinline class="w-full h-full">
+      <div class="relative rounded-xl overflow-hidden border border-indigo-500/20 bg-black aspect-video flex items-center justify-center">
+        <video id="demo" controls playsinline class="w-full h-full hidden">
           <source src="/api/video" type="video/mp4">
-          Votre navigateur ne lit pas la vidéo.
         </video>
+        <div id="loading" class="text-slate-400">Chargement de la vidéo…</div>
       </div>
-      <p class="text-sm text-slate-400 mt-4">
-        Fichier : <code class="bg-slate-800 px-2 py-1 rounded">wav2lip/final_lipsync_6s.mp4</code>
-      </p>
+      <p id="status" class="text-sm text-slate-400 mt-4"></p>
     </section>
 
     <a href="https://www.kaggle.com/code/coch205/wav2lip-6s-kaggle-minimal" target="_blank" rel="noopener"
        class="inline-block mt-10 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-full font-bold text-white transition shadow-lg shadow-indigo-500/30 card" style="animation-delay:.3s">
-      ⚡ Re-générer sur Kaggle
+      ⚡ Modifier / re-générer sur Kaggle
     </a>
   </main>
+
+  <script>
+    (async () => {
+      const statusEl = document.getElementById('status');
+      const video = document.getElementById('demo');
+      const loading = document.getElementById('loading');
+      try {
+        const r = await fetch('/api/health');
+        const data = await r.json();
+        statusEl.textContent = data.video_present ? 'Vidéo prête' : 'Aucune vidéo uploadée encore';
+        if (data.video_present) {
+          video.classList.remove('hidden');
+          loading.classList.add('hidden');
+          video.load();
+        } else {
+          loading.textContent = 'Aucune vidéo n\'est encore disponible.';
+        }
+      } catch (e) {
+        statusEl.textContent = 'Erreur API: ' + e.message;
+      }
+    })();
+  </script>
 </body>
 </html>
