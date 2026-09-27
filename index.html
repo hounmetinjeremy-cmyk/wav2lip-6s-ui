@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wav2Lip 6s — Talking Face</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+    .card { animation: fadeIn .8s ease-out forwards; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100 min-h-screen">
+  <main class="max-w-3xl mx-auto px-6 py-12 text-center">
+    <h1 class="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-4 card">
+      Wav2Lip 6s
+    </h1>
+    <p class="text-lg text-slate-300 mb-10 card" style="animation-delay:.1s">
+      Vidéo talking-face générée sur Kaggle GPU T4 · Cloudflare Pages + R2
+    </p>
+
+    <section class="bg-slate-900/70 backdrop-blur rounded-2xl p-8 border border-indigo-500/20 shadow-2xl card" style="animation-delay:.2s">
+      <div class="relative rounded-xl overflow-hidden border border-indigo-500/20 bg-black aspect-video">
+        <video id="demo" controls autoplay loop muted playsinline class="w-full h-full">
+          <source src="/api/video" type="video/mp4">
+          Votre navigateur ne lit pas la vidéo.
+        </video>
+      </div>
+      <p class="text-sm text-slate-400 mt-4">
+        Fichier : <code class="bg-slate-800 px-2 py-1 rounded">wav2lip/final_lipsync_6s.mp4</code>
+      </p>
+    </section>
+
+    <a href="https://www.kaggle.com/code/coch205/wav2lip-6s-kaggle-minimal" target="_blank" rel="noopener"
+       class="inline-block mt-10 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-full font-bold text-white transition shadow-lg shadow-indigo-500/30 card" style="animation-delay:.3s">
+      ⚡ Re-générer sur Kaggle
+    </a>
+  </main>
+</body>
+</html>
